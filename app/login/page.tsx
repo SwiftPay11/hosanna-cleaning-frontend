@@ -30,10 +30,14 @@ const handleLogin = async (e:any) => {
 
     // redirect
     router.push("/dashboard");
-
-  } catch (err) {
+    
+} catch (err: unknown) {
+  if (err instanceof Error) {
     setError(err.message || "Server error");
+  } else {
+    setError("Server error");
   }
+}
 };
 
   return (
