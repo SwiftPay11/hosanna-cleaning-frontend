@@ -30,10 +30,13 @@ export default function AdminLoginPage() {
     // redirect
     router.push("/admin");
 
-  } catch (err) {
-    setError(err.message || "Server error");
+  } catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError("Server error");
   }
-};
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-white">
