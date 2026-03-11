@@ -1,9 +1,10 @@
 "use client";
 
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
+import Link from "next/link";
+import { Sparkles, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,70 +12,153 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  
-const handleLogin = async (e:any) => {
-  e.preventDefault();
+  const handleLogin = async (e:any) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const data = await apiFetch("/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    try {
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    // store token
-    localStorage.setItem("token", data.access_token);
+      localStorage.setItem("token", data.access_token);
 
-    // redirect
-    router.push("/dashboard");
-    
-} catch (err: unknown) {
-  if (err instanceof Error) {
-    setError(err.message || "Server error");
-  } else {
-    setError("Server error");
-  }
-}
-};
+      router.push("/dashboard");
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Server error");
+      } else {
+        setError("Server error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-black relative px-6">
 
-        {error && (
-          <p className="bg-red-100 text-red-600 p-3 rounded mb-4">
-            {error}
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30"
+        style={{
+          backgroundImage: "url('/cleaning-bg.jpg')",
+        }}
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-[#2b1d16]/90" />
+
+      <div className="relative w-full max-w-md">
+
+        {/* Company Branding */}
+        <div className="text-center mb-8">
+
+          <div className="flex justify-center mb-4">
+            <div className="w-12 h-12 bg-[#6b3e26] rounded-full flex items-center justify-center">
+              <Sparkles className="text-white" size={20} />
+            </div>
+          </div>
+
+          <h1 className="text-2xl font-bold text-white">
+            Hosanna Global Cleaning
+          </h1>
+
+          <p className="text-gray-400 text-sm mt-2">
+            Professional Cleaning Services
           </p>
-        )}
 
-        <form onSubmit={handleLogin} className="space-y-5">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border rounded-lg px-4 py-3"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full border rounded-lg px-4 py-3"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        {/* Login Card */}
+        <div className="bg-[#1a120d] border border-[#3a2a21] p-10 rounded-2xl shadow-2xl backdrop-blur">
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
-          >
-            Login
-          </button>
-        </form>
+          <h2 className="text-xl font-semibold text-white mb-6 text-center">
+            Login to Your Account
+          </h2>
+
+          {error && (
+            <p className="bg-red-900/40 text-red-400 p-3 rounded mb-4 text-sm">
+              {error}
+            </p>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-5">
+
+            {/* Email */}
+            <div>
+              <label className="text-sm text-gray-400">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="w-full mt-2 bg-[#2b1d16] border border-[#3a2a21] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#6b3e26]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="text-sm text-gray-400">
+                Password
+              </label>
+
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className="w-full mt-2 bg-[#2b1d16] border border-[#3a2a21] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#6b3e26]"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {/* Forgot Password */}
+            <div className="text-right text-sm">
+              <Link
+                href="/forgot-password"
+                className="text-[#caa27c] hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
+            {/* Login Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#6b3e26] text-white py-3 rounded-lg font-medium hover:bg-[#8a5234] transition flex items-center justify-center gap-2"
+            >
+              {loading && <Loader2 className="animate-spin" size={18} />}
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+          </form>
+
+          {/* Register Link */}
+          <p className="text-center text-sm text-gray-400 mt-6">
+            Don’t have an account?{" "}
+            <Link
+              href="/register"
+              className="text-[#caa27c] hover:underline"
+            >
+              Create account
+            </Link>
+          </p>
+
+        </div>
+
       </div>
     </div>
   );
