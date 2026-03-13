@@ -66,12 +66,12 @@ export default function HomePage() {
             {/* VIDEO PLACEHOLDER */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/70">
               <p className="text-gray-300 text-lg">
-                Video coming soon (Cleaning service demo)
+                Experience Hosanna Perfection
               </p>
             </div>
 
             <Image
-              src="/hero.png"
+              src="/heroo.png"
               alt="Cleaning service"
               fill
               className="object-cover opacity-50"
