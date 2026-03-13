@@ -2,7 +2,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "Hosanna Dry Cleaners",
+  title: "HOSANNA GLOBAL ENTERPRISE LIMITED",
   description: "Premium garment care services",
 };
 

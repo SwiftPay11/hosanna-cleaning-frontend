@@ -81,7 +81,7 @@ export default function DashboardLayout({
         {/* MOBILE HEADER */}
         <div className="md:hidden p-4 flex justify-between items-center bg-[#1a120d]">
           <button onClick={() => setMenuOpen(true)}>☰</button>
-          <h2 className="font-bold">Hosanna Cleaning</h2>
+          <h2 className="font-bold">HOSANNA GLOBAL ENTERPRISE LIMITED</h2>
         </div>
 
         {children}
@@ -111,11 +111,15 @@ export default function DashboardLayout({
         </h2>
 
         <nav className="space-y-4">
-
-          <div className="flex items-center gap-3 text-[#caa27c]">
+           
+    
+          <button 
+           onClick={() => router.push("/dashboard")}
+          className="flex items-center gap-3 text-[#caa27c]">
+            
             <LayoutDashboard size={18} />
             Dashboard
-          </div>
+          </button>
 
           <button
             onClick={() => {
