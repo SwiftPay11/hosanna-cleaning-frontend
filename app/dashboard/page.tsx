@@ -23,7 +23,8 @@ interface Order {
 
 export default function DashboardPage() {
   const router = useRouter();
-
+  
+  const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
@@ -172,6 +173,13 @@ export default function DashboardPage() {
             Book Cleaning
           </button>
 
+          <button
+  onClick={() => setMenuOpen(true)}
+  className="md:hidden text-white"
+>
+  ☰
+</button>
+
         </div>
 
         {/* STATS */}
@@ -281,6 +289,40 @@ export default function DashboardPage() {
         </div>
 
       </main>
+      
+      {menuOpen && (
+  <div className="fixed inset-0 z-50 flex">
+    
+    <div className="w-64 bg-[#1a120d] p-6">
+      <button
+        onClick={() => setMenuOpen(false)}
+        className="text-white mb-6"
+      >
+        ✕
+      </button>
+
+      <nav className="space-y-4">
+        <button onClick={() => router.push("/dashboard")}>
+          Dashboard
+        </button>
+
+        <button onClick={() => router.push("/dashboard/book")}>
+          Book Cleaning
+        </button>
+
+        <button onClick={() => router.push("/dashboard/profile")}>
+          Profile
+        </button>
+      </nav>
+    </div>
+
+    <div
+      className="flex-1 bg-black/50"
+      onClick={() => setMenuOpen(false)}
+    />
+    
+  </div>
+)}
     </div>
   );
 }
