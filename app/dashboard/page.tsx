@@ -49,24 +49,24 @@ export default function DashboardPage() {
   }, [router]);
 
   useEffect(() => {
-    if (!user?.id) return;
+  if (!user?.id) return;
 
-    const socket = io("https://hosanna-cleaning-backend.onrender.com", {
-      query: { userId: user.id },
-    });
+  const socket = io("https://hosanna-cleaning-backend.onrender.com", {
+    query: { userId: user.id }
+  });
 
-    socket.on("orderUpdated", (updatedOrder) => {
-      toast.success(`Order is now ${updatedOrder.status}`);
+  socket.on("orderUpdated", (updatedOrder) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.id === updatedOrder.id ? updatedOrder : order
+      )
+    );
+  });
 
-      setOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order.id === updatedOrder.id ? updatedOrder : order
-        )
-      );
-    });
-
-    return () => socket.disconnect();
-  }, [user?.id]);
+  return () => {
+    socket.disconnect(); // ✅ correct cleanup
+  };
+}, [user?.id]);
 
   const logout = () => {
     localStorage.removeItem("token");
