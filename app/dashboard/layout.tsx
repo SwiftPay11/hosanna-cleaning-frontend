@@ -31,7 +31,7 @@ export default function DashboardLayout({
 
         <div>
           <h2 className="text-xl font-bold mb-10">
-            Hosanna Cleaning
+            HOSANNA GLOBAL ENTERPRISE LIMITED
           </h2>
 
           <nav className="space-y-4">
@@ -89,48 +89,76 @@ export default function DashboardLayout({
       </div>
 
       {/* MOBILE SIDEBAR */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
 
-          <div className="w-64 bg-[#1a120d] p-6">
+      
+      {/* ✅ MOBILE SIDEBAR */}
+{menuOpen && (
+  <div className="fixed inset-0 z-50 flex">
 
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="mb-6"
-            >
-              ✕
-            </button>
+    <div className="w-64 bg-[#1a120d] p-6 flex flex-col justify-between">
 
-            <nav className="space-y-4">
+      <div>
 
-              <button
-                onClick={() => router.push("/dashboard")}
-                className="flex items-center gap-3"
-              >
-                <LayoutDashboard size={18} />
-                Dashboard
-              </button>
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="text-white mb-6"
+        >
+          ✕
+        </button>
 
-              <button
-                onClick={() => router.push("/dashboard/book")}
-                className="flex items-center gap-3"
-              >
-                <CalendarCheck size={18} />
-                Book Cleaning
-              </button>
+        <h2 className="text-xl font-bold mb-10">
+          HOSANNA GLOBAL ENTERPRISE LIMITED
+        </h2>
 
-            </nav>
+        <nav className="space-y-4">
 
+          <div className="flex items-center gap-3 text-[#caa27c]">
+            <LayoutDashboard size={18} />
+            Dashboard
           </div>
 
-          <div
-            className="flex-1 bg-black/50"
-            onClick={() => setMenuOpen(false)}
-          />
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              router.push("/dashboard/book");
+            }}
+            className="flex items-center gap-3 text-gray-300 hover:text-[#caa27c]"
+          >
+            <CalendarCheck size={18} />
+            Book Cleaning
+          </button>
 
-        </div>
-      )}
+          <div className="flex items-center gap-3 text-gray-400">
+            <User size={18} />
+            Profile
+          </div>
 
+          <div className="flex items-center gap-3 text-gray-400">
+            <Settings size={18} />
+            Settings
+          </div>
+
+        </nav>
+
+      </div>
+
+      <button
+        onClick={logout}
+        className="flex items-center gap-2 text-red-400 hover:text-red-500"
+      >
+        <LogOut size={18} />
+        Logout
+      </button>
+
+    </div>
+
+    <div
+      className="flex-1 bg-black/50"
+      onClick={() => setMenuOpen(false)}
+    />
+
+  </div>
+)}
     </div>
   );
 }

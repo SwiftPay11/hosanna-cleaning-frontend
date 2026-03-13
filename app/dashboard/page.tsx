@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
-import {Plus,} from "lucide-react";
+import {
+  Plus,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import { apiFetch } from "@/lib/api";
 
@@ -20,7 +22,7 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -93,7 +95,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen  bg-[#2b1d16] text-white">
+    <div className="min-h-screen flex bg-[#2b1d16] text-white">
 
       {/* MAIN CONTENT */}
       <main className="flex-1 p-8">
@@ -101,6 +103,7 @@ export default function DashboardPage() {
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
          {/* ✅ ADDED MOBILE MENU BUTTON */}
+
           <div>
             <h1 className="text-3xl font-bold">
               Welcome back{user?.firstName ? `, ${user.firstName}` : ""} 👋
