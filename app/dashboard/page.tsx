@@ -3,14 +3,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
-import {
-  Plus,
-  LogOut,
-  LayoutDashboard,
-  CalendarCheck,
-  User,
-  Settings,
-} from "lucide-react";
+import {Plus,} from "lucide-react";
 import toast from "react-hot-toast";
 import { apiFetch } from "@/lib/api";
 
@@ -27,8 +20,6 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
-  // ✅ ADDED FOR MOBILE MENU
-const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -102,53 +93,7 @@ const [menuOpen, setMenuOpen] = useState(false);
   }
 
   return (
-    <div className="min-h-screen flex bg-[#2b1d16] text-white">
-
-      {/* SIDEBAR */}
-      <aside className="w-64 bg-[#1a120d] border-r border-[#3a2a21] p-6 hidden md:flex flex-col justify-between">
-
-        <div>
-          <h2 className="text-xl font-bold mb-10">
-            Hosanna Cleaning
-          </h2>
-
-          <nav className="space-y-4">
-
-            <div className="flex items-center gap-3 text-[#caa27c]">
-              <LayoutDashboard size={18} />
-              Dashboard
-            </div>
-
-            <button
-              onClick={() => router.push("/dashboard/book")}
-              className="flex items-center gap-3 text-gray-300 hover:text-[#caa27c]"
-            >
-              <CalendarCheck size={18} />
-              Book Cleaning
-            </button>
-
-            <div className="flex items-center gap-3 text-gray-400">
-              <User size={18} />
-              Profile
-            </div>
-
-            <div className="flex items-center gap-3 text-gray-400">
-              <Settings size={18} />
-              Settings
-            </div>
-
-          </nav>
-        </div>
-
-        <button
-          onClick={logout}
-          className="flex items-center gap-2 text-red-400 hover:text-red-500"
-        >
-          <LogOut size={18} />
-          Logout
-        </button>
-
-      </aside>
+    <div className="min-h-screen  bg-[#2b1d16] text-white">
 
       {/* MAIN CONTENT */}
       <main className="flex-1 p-8">
@@ -156,12 +101,6 @@ const [menuOpen, setMenuOpen] = useState(false);
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
          {/* ✅ ADDED MOBILE MENU BUTTON */}
-<button
-  onClick={() => setMenuOpen(true)}
-  className="md:hidden text-white text-2xl"
->
-  ☰
-</button>
           <div>
             <h1 className="text-3xl font-bold">
               Welcome back{user?.firstName ? `, ${user.firstName}` : ""} 👋
@@ -289,75 +228,6 @@ const [menuOpen, setMenuOpen] = useState(false);
         </div>
 
       </main>
-
-      {/* ✅ MOBILE SIDEBAR */}
-{menuOpen && (
-  <div className="fixed inset-0 z-50 flex">
-
-    <div className="w-64 bg-[#1a120d] p-6 flex flex-col justify-between">
-
-      <div>
-
-        <button
-          onClick={() => setMenuOpen(false)}
-          className="text-white mb-6"
-        >
-          ✕
-        </button>
-
-        <h2 className="text-xl font-bold mb-10">
-          Hosanna Cleaning
-        </h2>
-
-        <nav className="space-y-4">
-
-          <div className="flex items-center gap-3 text-[#caa27c]">
-            <LayoutDashboard size={18} />
-            Dashboard
-          </div>
-
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              router.push("/dashboard/book");
-            }}
-            className="flex items-center gap-3 text-gray-300 hover:text-[#caa27c]"
-          >
-            <CalendarCheck size={18} />
-            Book Cleaning
-          </button>
-
-          <div className="flex items-center gap-3 text-gray-400">
-            <User size={18} />
-            Profile
-          </div>
-
-          <div className="flex items-center gap-3 text-gray-400">
-            <Settings size={18} />
-            Settings
-          </div>
-
-        </nav>
-
-      </div>
-
-      <button
-        onClick={logout}
-        className="flex items-center gap-2 text-red-400 hover:text-red-500"
-      >
-        <LogOut size={18} />
-        Logout
-      </button>
-
-    </div>
-
-    <div
-      className="flex-1 bg-black/50"
-      onClick={() => setMenuOpen(false)}
-    />
-
-  </div>
-)}
 
     </div>
   );
