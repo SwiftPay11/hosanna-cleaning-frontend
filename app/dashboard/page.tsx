@@ -51,7 +51,7 @@ export default function DashboardPage() {
   useEffect(() => {
   if (!user?.id) return;
 
-  const socket = io("https://hosanna-cleaning-backend.onrender.com", {
+  const socket = io(process.env.NEXT_PUBLIC_API_URL, {
     query: { userId: user.id }
   });
 

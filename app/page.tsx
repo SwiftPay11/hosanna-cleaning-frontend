@@ -28,7 +28,7 @@ export default function HomePage() {
             </div>
 
             <span className="text-xl font-semibold text-white">
-              Hosanna Global Cleaning
+              Hosanna GLOBAL ENTERPRISES LIMITED
             </span>
           </div>
 
