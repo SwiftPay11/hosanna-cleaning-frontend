@@ -115,7 +115,7 @@ export default function DashboardPage() {
           </div>
 
           <button
-            onClick={() => router.push("/dashboard/book")}
+            onClick={() => router.push("/services")}
             className="flex items-center gap-2 bg-[#6b3e26] px-6 py-3 rounded-lg hover:bg-[#8a5234] transition"
           >
             <Plus size={18} />

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   Home,
   Building2,
@@ -15,6 +16,8 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+
+  const router = useRouter();
   return (
     <main className="font-sans bg-[#2b1d16] text-gray-200">
 
@@ -147,7 +150,7 @@ export default function HomePage() {
 
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10" onClick={() => router.push("/login")}>
 
           {[
             { icon: <Home />, title: "Residential Cleaning" },
