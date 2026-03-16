@@ -50,7 +50,7 @@ export default function HomePage() {
             </a>
 
             <Link
-              href="/contact"
+              href="/login"
               className="bg-[#6b3e26] text-white px-5 py-2.5 rounded-md hover:bg-[#8a5234] transition"
             >
               Book Now
