@@ -85,169 +85,238 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#2b1d16] text-white">
+    <div className="min-h-screen bg-[#2b1d16] text-white">
 
-      {/* Sidebar */}
-      <aside className="w-64 bg-[#1a120d] border-r border-[#3a2a21] p-6 flex flex-col justify-between">
-
-        <div>
-          <h2 className="text-xl font-bold mb-10">
-            Hosanna Global Cleaning
-          </h2>
-
-          <div className="flex items-center gap-3 text-[#caa27c]">
-            <LayoutDashboard size={18} />
-            Dashboard
-          </div>
-        </div>
+      {/* MOBILE HEADER */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-[#3a2a21] bg-[#1a120d]">
+        <h2 className="font-bold">Admin Panel</h2>
 
         <button
           onClick={() => {
             localStorage.removeItem("token");
             router.push("/");
           }}
-          className="flex items-center gap-2 text-red-400 hover:text-red-500"
+          className="text-red-400"
         >
-          <LogOut size={18} />
           Logout
         </button>
+      </div>
 
-      </aside>
+      <div className="flex">
 
-      {/* Main */}
-      <main className="flex-1 p-10 space-y-10">
+        {/* DESKTOP SIDEBAR */}
+        <aside className="hidden md:flex w-64 bg-[#1a120d] border-r border-[#3a2a21] p-6 flex-col justify-between">
 
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold">
-            Admin Control Panel
-          </h1>
-          <p className="text-gray-400">
-            Manage all cleaning bookings and customer services
-          </p>
-        </div>
+          <div>
+            <h2 className="text-xl font-bold mb-10">
+              Hosanna Global Cleaning
+            </h2>
 
-        {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-6">
+            <div className="flex items-center gap-3 text-[#caa27c]">
+              <LayoutDashboard size={18} />
+              Dashboard
+            </div>
+          </div>
 
-          <StatCard label="Total Orders" value={orders.length} />
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              router.push("/");
+            }}
+            className="flex items-center gap-2 text-red-400 hover:text-red-500"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
 
-          <StatCard
-            label="Revenue"
-            value={`$${revenue}`}
-            color="text-green-400"
-          />
+        </aside>
 
-          <StatCard
-            label="Pending"
-            value={orders.filter(o => o.status === "PENDING").length}
-            color="text-yellow-400"
-          />
+        {/* MAIN */}
+        <main className="flex-1 p-4 md:p-10 space-y-6 md:space-y-10">
 
-          <StatCard
-            label="Completed"
-            value={orders.filter(o => o.status === "COMPLETED").length}
-            color="text-blue-400"
-          />
+          {/* HEADER */}
+          <div>
+            <h1 className="text-xl md:text-3xl font-bold">
+              Admin Control Panel
+            </h1>
+            <p className="text-gray-400 text-sm md:text-base">
+              Manage all cleaning bookings
+            </p>
+          </div>
 
-        </div>
+          {/* STATS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
 
-        {/* Orders Table */}
-        <div className="bg-[#1a120d] border border-[#3a2a21] rounded-xl p-8 overflow-x-auto">
+            <StatCard label="Orders" value={orders.length} />
 
-          <h2 className="text-xl font-semibold mb-6">
-            All Cleaning Orders
-          </h2>
+            <StatCard
+              label="Revenue"
+              value={`$${revenue}`}
+              color="text-green-400"
+            />
 
-          <table className="w-full text-left">
+            <StatCard
+              label="Pending"
+              value={orders.filter(o => o.status === "PENDING").length}
+              color="text-yellow-400"
+            />
 
-            <thead>
-              <tr className="border-b border-[#3a2a21] text-gray-400 text-sm">
-                <th className="py-3">Order ID</th>
-                <th>Customer</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Date</th>
-                <th>Update</th>
-              </tr>
-            </thead>
+            <StatCard
+              label="Done"
+              value={orders.filter(o => o.status === "COMPLETED").length}
+              color="text-blue-400"
+            />
 
-            <tbody>
+          </div>
 
-              {orders.map((order) => (
+          {/* DESKTOP TABLE */}
+          <div className="hidden md:block bg-[#1a120d] border border-[#3a2a21] rounded-xl p-6 overflow-x-auto">
 
-                <tr
-                  key={order.id}
-                  onClick={() => setSelectedOrder(order)}
-                  className="border-b border-[#3a2a21] hover:bg-[#2b1d16] cursor-pointer"
-                >
+            <h2 className="text-xl font-semibold mb-6">
+              Orders
+            </h2>
 
-                  <td className="py-4 font-medium">
-                    {order.id.slice(0, 8)}...
-                  </td>
-
-                  <td>
-                    {order.user.firstName} {order.user.lastName}
-                  </td>
-
-                  <td>{order.user.email}</td>
-
-                  <td>
-                    <StatusBadge status={order.status} />
-                  </td>
-
-                  <td className="font-semibold text-[#caa27c]">
-                    ${order.total}
-                  </td>
-
-                  <td>
-                    {new Date(order.createdAt).toLocaleDateString()}
-                  </td>
-
-                  <td className="flex gap-2">
-
-                    <button
-                      onClick={() => updateStatus(order.id, "PENDING")}
-                      className="px-3 py-1 text-xs bg-yellow-500/20 text-yellow-400 rounded-full"
-                    >
-                      Pending
-                    </button>
-
-                    <button
-                      onClick={() => updateStatus(order.id, "COMPLETED")}
-                      className="px-3 py-1 text-xs bg-green-500/20 text-green-400 rounded-full"
-                    >
-                      Complete
-                    </button>
-
-                    <button
-                      onClick={() => updateStatus(order.id, "CANCELLED")}
-                      className="px-3 py-1 text-xs bg-red-500/20 text-red-400 rounded-full"
-                    >
-                      Cancel
-                    </button>
-
-                  </td>
-
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-[#3a2a21] text-gray-400 text-sm">
+                  <th className="py-3">ID</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Date</th>
+                  <th>Update</th>
                 </tr>
+              </thead>
 
-              ))}
+              <tbody>
+                {orders.map((order) => (
+                  <tr
+                    key={order.id}
+                    className="border-b border-[#3a2a21] hover:bg-[#2b1d16]"
+                  >
+                    <td className="py-4">{order.id.slice(0, 6)}</td>
 
-            </tbody>
+                    <td>
+                      {order.user.firstName} {order.user.lastName}
+                    </td>
 
-          </table>
+                    <td>
+                      <StatusBadge status={order.status} />
+                    </td>
 
-        </div>
+                    <td>${order.total}</td>
 
-      </main>
+                    <td>
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </td>
 
-      {/* Modal */}
+                    <td className="flex gap-2 flex-wrap">
+                      <button
+                        onClick={() => updateStatus(order.id, "PENDING")}
+                        className="px-2 py-1 text-xs bg-yellow-500/20 text-yellow-400 rounded"
+                      >
+                        Pending
+                      </button>
+
+                      <button
+                        onClick={() => updateStatus(order.id, "COMPLETED")}
+                        className="px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded"
+                      >
+                        Done
+                      </button>
+
+                      <button
+                        onClick={() => updateStatus(order.id, "CANCELLED")}
+                        className="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded"
+                      >
+                        Cancel
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* MOBILE CARDS */}
+          <div className="md:hidden space-y-4">
+
+            {orders.map((order) => (
+
+              <div
+                key={order.id}
+                onClick={() => setSelectedOrder(order)}
+                className="bg-[#1a120d] border border-[#3a2a21] rounded-xl p-4 space-y-3"
+              >
+
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-400">
+                    {order.id.slice(0, 6)}
+                  </span>
+                  <StatusBadge status={order.status} />
+                </div>
+
+                <p className="font-semibold">
+                  {order.user.firstName} {order.user.lastName}
+                </p>
+
+                <p className="text-sm text-gray-400">
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </p>
+
+                <p className="text-[#caa27c] font-bold">
+                  ${order.total}
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-2">
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateStatus(order.id, "PENDING");
+                    }}
+                    className="px-2 py-1 text-xs bg-yellow-500/20 text-yellow-400 rounded"
+                  >
+                    Pending
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateStatus(order.id, "COMPLETED");
+                    }}
+                    className="px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded"
+                  >
+                    Done
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateStatus(order.id, "CANCELLED");
+                    }}
+                    className="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded"
+                  >
+                    Cancel
+                  </button>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </main>
+      </div>
+
+      {/* MODAL (UNCHANGED) */}
       {selectedOrder && (
 
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
 
-          <div className="bg-[#1a120d] border border-[#3a2a21] rounded-xl shadow-xl p-8 max-w-lg w-full space-y-6">
+          <div className="bg-[#1a120d] border border-[#3a2a21] rounded-xl shadow-xl p-6 max-w-lg w-full space-y-6">
 
             <h2 className="font-bold text-lg">
               Order Details
@@ -304,9 +373,9 @@ export default function AdminPage() {
 
 function StatCard({ label, value, color = "text-white" }: any) {
   return (
-    <div className="bg-[#1a120d] border border-[#3a2a21] p-6 rounded-xl">
-      <p className="text-gray-400 text-sm">{label}</p>
-      <h3 className={`text-3xl font-bold mt-2 ${color}`}>
+    <div className="bg-[#1a120d] border border-[#3a2a21] p-4 md:p-6 rounded-xl">
+      <p className="text-gray-400 text-xs md:text-sm">{label}</p>
+      <h3 className={`text-xl md:text-3xl font-bold mt-2 ${color}`}>
         {value}
       </h3>
     </div>
@@ -314,7 +383,6 @@ function StatCard({ label, value, color = "text-white" }: any) {
 }
 
 function StatusBadge({ status }: any) {
-
   const styles: any = {
     PENDING: "bg-yellow-500/20 text-yellow-400",
     COMPLETED: "bg-green-500/20 text-green-400",
@@ -323,7 +391,7 @@ function StatusBadge({ status }: any) {
 
   return (
     <span
-      className={`px-3 py-1 text-xs font-semibold rounded-full ${
+      className={`px-2 md:px-3 py-1 text-xs font-semibold rounded-full ${
         styles[status] || "bg-gray-500/20 text-gray-400"
       }`}
     >
