@@ -147,9 +147,11 @@ export default function AdminPage() {
   </div>
 
   <Link href="/admin/services">
-    <button className="bg-[#6b3e26] hover:bg-[#8a5234] transition px-4 py-2 rounded-lg font-semibold w-full md:w-auto">
-      Manage Services
-    </button>
+    <button className="bg-gradient-to-r from-indigo-500 to-blue-500 
+px-4 py-2 rounded-lg font-semibold w-full md:w-auto 
+hover:scale-105 transition">
+  Manage Services
+</button>
   </Link>
 
 </div>
