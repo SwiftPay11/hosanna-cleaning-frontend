@@ -35,32 +35,32 @@ export default function BookCleaningPage() {
         {
           id: "domestic-cleaning",
           name: "Domestic / Residential Cleaning",
-          price: 5000,
+          price: 13,
         },
         {
           id: "office-cleaning",
           name: "Office / Commercial Cleaning",
-          price: 8000,
+          price: 13,
         },
         {
           id: "airbnb-cleaning",
           name: "Airbnb & Rental Cleaning",
-          price: 7000,
+          price: 13,
         },
         {
           id: "move-cleaning",
           name: "Move-In / Move-Out Cleaning",
-          price: 9000,
+          price: 13,
         },
         {
           id: "tenancy-cleaning",
           name: "End of Tenancy Cleaning",
-          price: 8500,
+          price: 13,
         },
         {
           id: "backyard-cleaning",
           name: "Backyard & Street Cleaning",
-          price: 6000,
+          price: 13,
         },
       ];
 
@@ -170,7 +170,7 @@ export default function BookCleaningPage() {
                   }`}
                 >
                   <h3 className="font-semibold">{service.name}</h3>
-                  <p className="text-gray-400">₦{service.price}</p>
+                  <p className="text-gray-400">${service.price}</p>
                 </div>
               ))}
             </div>
@@ -238,7 +238,7 @@ export default function BookCleaningPage() {
                 <div key={s.id} className="flex justify-between">
                   <span>{s.name}</span>
                   <span>
-                    {s.quantity} × ₦{s.price}
+                    {s.quantity} × ${s.price}
                   </span>
                 </div>
               ))}
@@ -246,7 +246,7 @@ export default function BookCleaningPage() {
 
             <div className="border-t border-[#3a2a21] pt-4 flex justify-between font-bold text-lg">
               <span>Total</span>
-              <span>₦{total}</span>
+              <span>${total}</span>
             </div>
 
             <div className="mt-8 flex justify-between">
@@ -269,5 +269,5 @@ export default function BookCleaningPage() {
         )}
       </div>
     </div>
-  );
+  );  
 }

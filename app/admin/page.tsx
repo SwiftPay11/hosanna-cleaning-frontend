@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { LayoutDashboard, LogOut } from "lucide-react";
-
+import Link from "next/link";
 interface Order {
   id: string;
   status: string;
@@ -135,14 +135,24 @@ export default function AdminPage() {
         <main className="flex-1 p-4 md:p-10 space-y-6 md:space-y-10">
 
           {/* HEADER */}
-          <div>
-            <h1 className="text-xl md:text-3xl font-bold">
-              Admin Control Panel
-            </h1>
-            <p className="text-gray-400 text-sm md:text-base">
-              Manage all cleaning bookings
-            </p>
-          </div>
+         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+  <div>
+    <h1 className="text-xl md:text-3xl font-bold">
+      Admin Control Panel
+    </h1>
+    <p className="text-gray-400 text-sm md:text-base">
+      Manage all cleaning bookings
+    </p>
+  </div>
+
+  <Link href="/admin/services">
+    <button className="bg-[#6b3e26] hover:bg-[#8a5234] transition px-4 py-2 rounded-lg font-semibold w-full md:w-auto">
+      Manage Services
+    </button>
+  </Link>
+
+</div>
 
           {/* STATS */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
