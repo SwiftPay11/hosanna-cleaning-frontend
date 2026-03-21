@@ -32,39 +32,30 @@ export default function RegisterPage() {
     setSuccess("");
 
     try {
-      const res = await apiFetch("/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+  const data = await apiFetch("/auth/register", {
+    method: "POST",
+    body: JSON.stringify(form),
+  });
 
-      const data = await res.json();
+  setSuccess("Account created successfully!");
 
-      if (!res.ok) {
-        throw new Error(data.message || "Registration failed");
-      }
+  setForm({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
 
-      setSuccess("Account created successfully!");
+  setTimeout(() => {
+    router.push("/login");
+  }, 2000);
 
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        password: "",
-      });
-
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+} catch (err: any) {
+  setError(err.message || "Registration failed");
+} finally {
+  setLoading(false);
+}
   };
 
   return (
