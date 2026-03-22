@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   Home,
   Building2,
@@ -18,6 +19,29 @@ import {
 export default function HomePage() {
 
   const router = useRouter();
+  const [reviews, setReviews] = useState([
+  {
+    name: "Sarah",
+    rating: 5,
+    comment: "Hosanna Global Cleaning did an excellent job. My home has never looked better.",
+  },
+  {
+    name: "Michael",
+    rating: 5,
+    comment: "Very professional and fast service.",
+  },
+  {
+    name: "Emily",
+    rating: 5,
+    comment: "Amazing experience overall.",
+  },
+]);
+
+const [showModal, setShowModal] = useState(false);
+const [rating, setRating] = useState<number | null>(null);
+const [comment, setComment] = useState("");
+const [showAll, setShowAll] = useState(false);
+
   return (
     <main className="font-sans bg-[#2b1d16] text-gray-200">
 
@@ -216,43 +240,137 @@ export default function HomePage() {
       </section>
 
       {/* ================= TESTIMONIALS ================= */}
-      <section id="reviews" className="py-24 bg-[#1a120d]">
+   
+<section id="reviews" className="py-24 bg-[#1a120d]">
 
-        <div className="text-center mb-16">
+  <div className="text-center mb-16">
+    <h2 className="text-4xl font-bold text-white">
+      What Our Customers Say
+    </h2>
+  </div>
 
-          <h2 className="text-4xl font-bold text-white">
-            What Our Customers Say
-          </h2>
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-3 gap-10">
 
-        </div>
+    {(showAll ? reviews : reviews.slice(0, 3)).map((r, i) => (
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-3 gap-10">
+      <div
+        key={i}
+        className="bg-[#2b1d16] p-8 rounded-2xl border border-[#3a2a21]"
+      >
 
-          {["Sarah", "Michael", "Emily"].map((name, i) => (
+        <p className="text-yellow-400 mb-4">
+          {"★".repeat(r.rating)}
+        </p>
 
-            <div
-              key={i}
-              className="bg-[#2b1d16] p-8 rounded-2xl border border-[#3a2a21]"
-            >
+        <p className="text-gray-300">
+          {r.comment}
+        </p>
 
-              <p className="text-yellow-400 mb-4">★★★★★</p>
+        <p className="mt-6 font-semibold text-white">
+          {r.name}
+        </p>
 
-              <p className="text-gray-300">
-                Hosanna Global Cleaning did an excellent job.
-                My home has never looked better.
-              </p>
+      </div>
 
-              <p className="mt-6 font-semibold text-white">
-                {name}
-              </p>
+    ))}
 
-            </div>
+  </div>
 
-          ))}
+  {/* SEE MORE */}
+  {reviews.length > 3 && !showAll && (
+    <div className="text-center mt-6">
+      <button
+        onClick={() => setShowAll(true)}
+        className="text-yellow-400 underline"
+      >
+        See more reviews
+      </button>
+    </div>
+  )}
 
-        </div>
+  {/* LEAVE REVIEW BUTTON */}
+  <div className="text-center mt-12">
+    <button
+      onClick={() => setShowModal(true)}
+      className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition"
+    >
+      Leave us a Review
+    </button>
+  </div>
 
-      </section>
+</section>
+
+{/* REVIEW MODAL */}
+{showModal && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+    <div className="bg-[#2b1d16] p-6 rounded-xl w-[90%] max-w-md space-y-4">
+
+      <h3 className="text-white text-lg font-bold text-center">
+        Rate your experience
+      </h3>
+
+      {/* STARS */}
+      <div className="flex justify-center gap-2 text-2xl text-yellow-400 cursor-pointer">
+        {[1,2,3,4,5].map((s) => (
+          <span
+            key={s}
+            onClick={() => setRating(s)}
+            className={rating && s <= rating ? "" : "opacity-30"}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+
+      {/* COMMENT */}
+      {rating && (
+        <textarea
+          placeholder="Leave a comment..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          className="w-full p-3 rounded bg-black/30 text-white outline-none"
+        />
+      )}
+
+      {/* ACTIONS */}
+      <div className="flex gap-3">
+
+        <button
+          onClick={() => {
+            if (!rating || !comment) return;
+
+            setReviews([
+              {
+                name: "Guest",
+                rating,
+                comment,
+              },
+              ...reviews,
+            ]);
+
+            setShowModal(false);
+            setRating(null);
+            setComment("");
+          }}
+          className="bg-green-600 px-4 py-2 rounded w-full"
+        >
+          Submit
+        </button>
+
+        <button
+          onClick={() => setShowModal(false)}
+          className="bg-gray-600 px-4 py-2 rounded w-full"
+        >
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
 
       {/* ================= FOOTER ================= */}
       <footer className="bg-black text-gray-400 py-12 text-center space-y-4">
