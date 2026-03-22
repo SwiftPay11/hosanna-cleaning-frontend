@@ -63,13 +63,13 @@ export default function ServicesPage() {
     await apiFetch(`/services/${service.id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        isActive: !service.isActive,
+        active: !service.active,
       }),
     });
 
     fetchServices();
     showToast(
-      service.isActive ? "Service deactivated ⛔" : "Service activated ✅"
+      service.active ? "Service deactivated ⛔" : "Service activated ✅"
     );
   };
 
@@ -138,7 +138,7 @@ export default function ServicesPage() {
           <div
             key={s.id}
             className={`bg-[#1a120d] border border-[#3a2a21] p-4 rounded-xl space-y-3 ${
-              !s.isActive ? "opacity-50" : ""
+              !s.active ? "opacity-50" : ""
             }`}
           >
 
@@ -151,12 +151,12 @@ export default function ServicesPage() {
 
               <span
                 className={`text-xs px-2 py-1 rounded-full ${
-                  s.isActive
+                  s.active
                     ? "bg-green-500/20 text-green-400"
                     : "bg-red-500/20 text-red-400"
                 }`}
               >
-                {s.isActive ? "Active" : "Inactive"}
+                {s.active ? "Active" : "Inactive"}
               </span>
             </div>
 
@@ -167,7 +167,7 @@ export default function ServicesPage() {
                 onClick={() => toggleService(s)}
                 className="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded text-xs"
               >
-                {s.isActive ? "Deactivate" : "Activate"}
+                {s.active ? "Deactivate" : "Activate"}
               </button>
 
               <button
