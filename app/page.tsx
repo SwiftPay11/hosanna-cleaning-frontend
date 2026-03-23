@@ -22,6 +22,7 @@ export default function HomePage() {
 
   const router = useRouter();
  const [reviews, setReviews] = useState<any[]>([]);
+ const [current, setCurrent] = useState(0);
 
  useEffect(() => {
   const loadReviews = async () => {
@@ -35,6 +36,25 @@ export default function HomePage() {
 
   loadReviews();
 }, []);
+
+const images = [
+  "/heroo.png",
+  "/clean1.jpg",
+  "/clean2.jpg",
+  "/clean3.jpg",
+  "/clean4.jpg",
+  "/clean5.jpg",
+  "/clean6.jpg",
+];
+
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrent((prev) => (prev + 1) % images.length);
+  }, 4000); // 4 seconds
+
+  return () => clearInterval(interval);
+}, []); 
 
 const [showModal, setShowModal] = useState(false);
 const [rating, setRating] = useState<number | null>(null);
@@ -96,13 +116,28 @@ const [showAll, setShowAll] = useState(false);
               </p>
             </div>
 
-            <Image
-              src="/heroo.png"
-              alt="Cleaning service"
-              fill
-              className="object-cover opacity-50"
-            />
+            {images.map((img, index) => (
+  <Image
+    key={index}
+    src={img}
+    alt="Cleaning service"
+    fill
+    className={`object-cover transition-opacity duration-1000 ${
+      index === current ? "opacity-60" : "opacity-0"
+    }`}
+  />
+))}
 
+<div className="flex justify-center mt-4 gap-2">
+  {images.map((_, i) => (
+    <div
+      key={i}
+      className={`w-2 h-2 rounded-full ${
+        i === current ? "bg-white" : "bg-gray-500"
+      }`}
+    />
+  ))}
+</div>
           </div>
         </div>
       </section>
