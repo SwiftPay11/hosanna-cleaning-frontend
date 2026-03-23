@@ -336,14 +336,16 @@ const [showAll, setShowAll] = useState(false);
       <div className="flex gap-3">
 
         <button
-        onClick={async () => {
+       onClick={async () => {
   if (!rating || comment.trim() === "") return;
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   try {
     const newReview = await apiFetch("/reviews", {
       method: "POST",
       body: JSON.stringify({
-        name: "Guest",
+        name: user?.firstName || "Guest",
         rating,
         comment,
       }),
