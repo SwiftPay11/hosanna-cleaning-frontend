@@ -2,7 +2,7 @@
 
 export default function WhatsAppButton() {
 
-  const phoneNumber = "07551024386"; // 👉 replace with your number (no +)
+  const phoneNumber = "447551024386"; // 👉 replace with your number (no +)
   const message = "Hello, I want to inquire about your cleaning services";
 
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
