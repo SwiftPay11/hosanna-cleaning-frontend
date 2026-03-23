@@ -174,7 +174,7 @@ export default function RegisterPage() {
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
-                placeholder="+234 800 000 0000"
+                placeholder="+44 800 000 0000"
                 required
                 className="w-full mt-2 bg-[#2b1d16] border border-[#3a2a21] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#6b3e26]"
               />

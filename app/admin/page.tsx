@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 interface Order {
   id: string;
   status: string;
@@ -88,6 +89,15 @@ export default function AdminPage() {
     <div className="min-h-screen bg-[#2b1d16] text-white">
 
       {/* MOBILE HEADER */}
+
+      <button
+  onClick={() => router.push("/admin-dashboard")}
+  className="mb-4 flex items-center gap-2 text-sm text-gray-300 hover:text-white"
+>
+  <ArrowLeft size={18} />
+  Back
+</button>
+
       <div className="md:hidden flex items-center justify-between p-4 border-b border-[#3a2a21] bg-[#1a120d]">
         <h2 className="font-bold">Admin Panel</h2>
 
