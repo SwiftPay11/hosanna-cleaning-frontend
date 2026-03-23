@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { apiFetch } from "@/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -19,23 +21,20 @@ import {
 export default function HomePage() {
 
   const router = useRouter();
-  const [reviews, setReviews] = useState([
-  {
-    name: "Sarah",
-    rating: 5,
-    comment: "Hosanna Global Cleaning did an excellent job. My home has never looked better.",
-  },
-  {
-    name: "Michael",
-    rating: 5,
-    comment: "Very professional and fast service.",
-  },
-  {
-    name: "Emily",
-    rating: 5,
-    comment: "Amazing experience overall.",
-  },
-]);
+ const [reviews, setReviews] = useState<any[]>([]);
+
+ useEffect(() => {
+  const loadReviews = async () => {
+    try {
+      const data = await apiFetch("/reviews");
+      setReviews(data);
+    } catch (err) {
+      console.error("Failed to load reviews");
+    }
+  };
+
+  loadReviews();
+}, []);
 
 const [showModal, setShowModal] = useState(false);
 const [rating, setRating] = useState<number | null>(null);
@@ -337,22 +336,28 @@ const [showAll, setShowAll] = useState(false);
       <div className="flex gap-3">
 
         <button
-          onClick={() => {
-            if (!rating || !comment) return;
+        onClick={async () => {
+  if (!rating || comment.trim() === "") return;
 
-            setReviews([
-              {
-                name: "Guest",
-                rating,
-                comment,
-              },
-              ...reviews,
-            ]);
+  try {
+    const newReview = await apiFetch("/reviews", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "Guest",
+        rating,
+        comment,
+      }),
+    });
 
-            setShowModal(false);
-            setRating(null);
-            setComment("");
-          }}
+    setReviews([newReview, ...reviews]);
+
+    setShowModal(false);
+    setRating(null);
+    setComment("");
+  } catch (err) {
+    console.error("Failed to submit review");
+  }
+}}
           className="bg-green-600 px-4 py-2 rounded w-full"
         >
           Submit
@@ -376,8 +381,13 @@ const [showAll, setShowAll] = useState(false);
       <footer className="bg-black text-gray-400 py-12 text-center space-y-4">
 
         <p className="text-sm">
-          © 2026 Hosanna Global Cleaning Services
+          © 2026 Hosanna Global Enterprises Limited
         </p>
+
+       <p className="text-sm">
+        41 Edward Street, North Ormesby, Middlebrough,
+        North Yorkshire, United Kingdom, TS3 6JJ
+       </p>
 
         <div className="flex justify-center gap-8 text-sm">
 
