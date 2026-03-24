@@ -45,6 +45,10 @@ const images = [
   "/clean4.jpg",
   "/clean5.jpg",
   "/clean6.jpg",
+  "/clean7.jpg",
+  "/clean8.jpg",
+  "/clean9.jpg",
+  "/clean10.jpg",
 ];
 
 
