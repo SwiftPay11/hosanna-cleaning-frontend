@@ -73,9 +73,15 @@ const [showAll, setShowAll] = useState(false);
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#6b3e26] rounded-full flex items-center justify-center">
-              <Sparkles size={18} className="text-white" />
-            </div>
+  <div className="w-10 h-10 rounded-full overflow-hidden bg-white flex items-center justify-center">
+    <Image
+      src="/logo.jpeg"
+      alt="Hosanna Logo"
+      width={40}
+      height={40}
+      className="object-cover"
+    />
+  </div>
 
             <span className="text-xl font-semibold text-white">
               Hosanna GLOBAL ENTERPRISES LIMITED
