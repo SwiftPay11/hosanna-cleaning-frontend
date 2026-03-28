@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import Link from "next/link";
 import { Sparkles, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -60,12 +61,18 @@ export default function LoginPage() {
 
         {/* Company Branding */}
         <div className="text-center mb-8">
-
-          <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-[#6b3e26] rounded-full flex items-center justify-center">
-              <Sparkles className="text-white" size={20} />
-            </div>
-          </div>
+        
+        <div className="flex justify-center mb-4">
+  <div className="w-12 h-12 rounded-full overflow-hidden bg-white flex items-center justify-center">
+    <Image
+      src="/logo.jpeg"
+      alt="Hosanna Logo"
+      width={48}
+      height={48}
+      className="object-contain p-1"
+    />
+  </div>
+</div>
 
           <h1 className="text-2xl font-bold text-white">
             HOSANNA GLOBAL ENTERPRISES LIMITED
