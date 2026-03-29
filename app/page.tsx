@@ -432,7 +432,7 @@ const [showAll, setShowAll] = useState(false);
         </p>
 
        <p className="text-sm">
-        41 Edward Street, North Ormesby, Middlebrough,
+        41 Edward Street, North Ormesby, Middlesbrough,
         North Yorkshire, United Kingdom, TS3 6JJ
        </p>
 
