@@ -20,6 +20,7 @@ import {
 
 export default function HomePage() {
 
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
  const [reviews, setReviews] = useState<any[]>([]);
  const [current, setCurrent] = useState(0);
@@ -379,35 +380,43 @@ const [showAll, setShowAll] = useState(false);
       {/* ACTIONS */}
       <div className="flex gap-3">
 
-        <button
-       onClick={async () => {
-  if (!rating || comment.trim() === "") return;
+       <button
+  onClick={async () => {
+    if (!rating || comment.trim() === "" || loading) return;
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-  try {
-    const newReview = await apiFetch("/reviews", {
-      method: "POST",
-      body: JSON.stringify({
-        name: user?.firstName || "Guest",
-        rating,
-        comment,
-      }),
-    });
+    try {
+      setLoading(true);
 
-    setReviews([newReview, ...reviews]);
+      const newReview = await apiFetch("/reviews", {
+        method: "POST",
+        body: JSON.stringify({
+          name: user?.firstName || "Guest",
+          rating,
+          comment,
+        }),
+      });
 
-    setShowModal(false);
-    setRating(null);
-    setComment("");
-  } catch (err) {
-    console.error("Failed to submit review");
-  }
-}}
-          className="bg-green-600 px-4 py-2 rounded w-full"
-        >
-          Submit
-        </button>
+      setReviews([newReview, ...reviews]);
+
+      setShowModal(false);
+      setRating(null);
+      setComment("");
+    } catch (err) {
+      console.error("Failed to submit review");
+    } finally {
+      setLoading(false);
+    }
+  }}
+  disabled={loading}
+  className="bg-green-600 px-4 py-2 rounded w-full flex items-center justify-center gap-2 disabled:opacity-60"
+>
+  {loading && (
+    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+  )}
+  {loading ? "Submitting..." : "Submit"}
+</button>
 
         <button
           onClick={() => setShowModal(false)}

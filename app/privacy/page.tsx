@@ -212,7 +212,12 @@ export default function PrivacyPage() {
   );
 }
 
-function Section({ title, children }) {
+type SectionProps = {
+  title: string;
+  children: React.ReactNode;
+};
+
+function Section({ title, children }: SectionProps) {
   return (
     <section className="mb-10 border-b border-[#8B5E3C]/20 pb-6">
       <h2 className="text-lg font-semibold text-[#8B5E3C] mb-4">
