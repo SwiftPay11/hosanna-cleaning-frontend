@@ -205,10 +205,10 @@ const [showAll, setShowAll] = useState(false);
       </section>
 
       {/* ================= SERVICES ================= */}
-     <section className="bg-black py-24 px-6">
-  
-  {/* TOP TEXT */}
-  <div className="text-center mb-14">
+  <section className="bg-black py-24 px-6">
+
+  {/* HEADER */}
+  <div className="text-center mb-16">
     <p className="text-[#8B5E3C] uppercase tracking-[3px] text-sm">
       WHAT WE OFFER
     </p>
@@ -222,34 +222,78 @@ const [showAll, setShowAll] = useState(false);
     </p>
   </div>
 
-  {/* CARD */}
-  <div className="max-w-6xl mx-auto bg-[#2b1d16] border border-[#3a2a21] rounded-lg shadow-xl p-8 flex flex-col lg:flex-row items-center gap-10">
+  {/* SERVICES */}
+  <div className="space-y-16 max-w-6xl mx-auto">
 
-    {/* IMAGE */}
-    <div className="w-full lg:w-1/2">
-      <img
-        src="/services/residential.jpg"
-        alt="Standard Clean"
-        className="w-full h-[280px] object-cover rounded-md"
-      />
-    </div>
+    {[
+      {
+        title: "Residential Cleaning",
+        image: "/services/residential.jpg",
+        text: "A standard clean is something that a homeowner would do regularly to upkeep the cleanliness of their homes. Regular chores, such as vacuuming and mopping the floors, general bathroom cleaning, kitchen cleaning, and dusting."
+      },
+      {
+        title: "Office Cleaning",
+        image: "/services/office.jpg",
+        text: "Professional office cleaning services designed to maintain a clean, productive and healthy working environment. Includes desks, floors, restrooms, and common areas."
+      },
+      {
+        title: "Airbnb Cleaning",
+        image: "/services/airbnb.jpg",
+        text: "Reliable and fast turnover cleaning for Airbnb and short-let properties. We ensure your space is spotless, guest-ready, and maintained to high standards."
+      },
+      {
+        title: "Move-In / Move-Out Cleaning",
+        image: "/services/move.jpg",
+        text: "Deep cleaning services for moving in or out of properties. We ensure every area is cleaned thoroughly, making the space fresh and ready."
+      },
+      {
+        title: "End of Tenancy Cleaning",
+        image: "/services/tenancy.jpg",
+        text: "Detailed cleaning service tailored for tenants and landlords to meet end-of-tenancy standards and secure deposit returns."
+      },
+      {
+        title: "Outdoor / Street Cleaning",
+        image: "/services/outdoor.jpg",
+        text: "Cleaning of outdoor areas including pavements, streets, and surrounding environments to maintain a clean and safe space."
+      }
+    ].map((service, i) => (
 
-    {/* TEXT SIDE */}
-    <div className="w-full lg:w-1/2 text-center lg:text-left">
+      <div
+        key={i}
+        className={`bg-[#2b1d16] border border-[#3a2a21] rounded-lg shadow-xl p-8 flex flex-col lg:flex-row items-center gap-10 ${
+          i % 2 !== 0 ? "lg:flex-row-reverse" : ""
+        }`}
+      >
 
-      <h3 className="text-2xl font-bold text-white mb-4">
-        Standard Clean
-      </h3>
+        {/* IMAGE */}
+        <div className="w-full lg:w-1/2">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-[280px] object-cover rounded-md"
+          />
+        </div>
 
-      <p className="text-gray-300 leading-8 text-[16px] mb-6">
-        A standard clean is something that a homeowner would do regularly to upkeep the cleanliness of their homes. Regular chores, such as vacuuming and mopping the floors, general bathroom cleaning, kitchen cleaning, and dusting.
-      </p>
+        {/* TEXT */}
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
 
-      <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-8 py-3 rounded font-semibold animate-shake">
-        Get A Quote
-      </button>
+          <h3 className="text-2xl font-bold text-white mb-4">
+            {service.title}
+          </h3>
 
-    </div>
+          <p className="text-gray-300 leading-8 text-[16px] mb-6">
+            {service.text}
+          </p>
+
+          <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-8 py-3 rounded font-semibold animate-shake">
+            Get A Quote
+          </button>
+
+        </div>
+      </div>
+
+    ))}
+
   </div>
 
 </section>
