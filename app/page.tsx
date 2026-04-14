@@ -114,43 +114,63 @@ const [showAll, setShowAll] = useState(false);
       </nav>
 
       {/* ================= MEDIA SECTION ================= */}
-      <section className="bg-black py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+     <section className="relative h-[85vh] w-full overflow-hidden">
 
-          <div className="relative w-full h-[420px] rounded-2xl overflow-hidden shadow-2xl">
-
-            {/* VIDEO PLACEHOLDER */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-              <p className="text-gray-300 text-lg">
-                Experience Hosanna Perfection
-              </p>
-            </div>
-
-            {images.map((img, index) => (
-  <Image
-    key={index}
-    src={img}
-    alt="Cleaning service"
-    fill
-    className={`object-cover transition-opacity duration-1000 ${
-      index === current ? "opacity-60" : "opacity-0"
-    }`}
-  />
-))}
-
-<div className="flex justify-center mt-4 gap-2">
-  {images.map((_, i) => (
-    <div
-      key={i}
-      className={`w-2 h-2 rounded-full ${
-        i === current ? "bg-white" : "bg-gray-500"
+  {/* BACKGROUND IMAGE SLIDER */}
+  {images.map((img, index) => (
+    <Image
+      key={index}
+      src={img}
+      alt="Cleaning service"
+      fill
+      priority
+      className={`object-cover transition-opacity duration-1000 ${
+        index === current ? "opacity-100" : "opacity-0"
       }`}
     />
   ))}
-</div>
-          </div>
-        </div>
-      </section>
+
+  {/* DARK OVERLAY */}
+  <div className="absolute inset-0 bg-black/60" />
+
+  {/* CONTENT */}
+  <div className="absolute inset-0 flex items-center">
+    <div className="max-w-7xl mx-auto px-6 lg:px-12">
+
+      <div className="max-w-2xl space-y-6">
+
+        {/* MAIN TITLE */}
+        <h1 className="text-5xl md:text-6xl font-extrabold text-[#8B5E3C] leading-tight">
+          Let us do the cleaning!
+        </h1>
+
+        {/* SUBTEXT (NOW BOLD LIKE YOUR SCREENSHOT) */}
+        <p className="text-xl md:text-2xl font-bold text-white">
+          You deserve a clean house, and that’s our specialty.
+        </p>
+
+        {/* BUTTON */}
+        <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-6 py-3 text-lg font-semibold rounded shadow-lg transition animate-[wiggle_1s_ease-in-out_infinite]">
+          GET A QUOTE NOW
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  {/* DOT INDICATORS */}
+  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+    {images.map((_, i) => (
+      <div
+        key={i}
+        className={`w-2.5 h-2.5 rounded-full ${
+          i === current ? "bg-[#8B5E3C]" : "bg-gray-400"
+        }`}
+      />
+    ))}
+  </div>
+
+</section>
 
       {/* ================= HERO ================= */}
       <section className="py-20">
