@@ -406,7 +406,7 @@ const [showAll, setShowAll] = useState(false);
   <div className="text-center mt-12">
     <button
       onClick={() => setShowModal(true)}
-      className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition"
+      className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition animate-[wiggle_1s_ease-in-out_infinite]"
     >
       Leave us a Review
     </button>
