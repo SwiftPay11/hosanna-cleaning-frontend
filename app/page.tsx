@@ -18,6 +18,7 @@ import {
   Mail,
 } from "lucide-react";
 
+
 export default function HomePage() {
 
   const [loading, setLoading] = useState(false);
@@ -529,28 +530,6 @@ const [showAll, setShowAll] = useState(false);
   </div>
 )}
 
-      {/* ================= FOOTER ================= */}
-      <footer className="bg-black text-gray-400 py-12 text-center space-y-4">
-
-        <p className="text-sm">
-          © 2026 Hosanna Global Enterprises Limited
-        </p>
-
-       <p className="text-sm">
-        41 Edward Street, North Ormesby, Middlesbrough,
-        North Yorkshire, United Kingdom, TS3 6JJ
-       </p>
-
-        <div className="flex justify-center gap-8 text-sm">
-
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/contact">Contact</Link>
-
-        </div>
-
-      </footer>
-
       <section className="bg-[#0f0a07] text-white py-20 mt-20 border-t border-[#6b3e26]/30">
   <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
 
@@ -565,7 +544,7 @@ const [showAll, setShowAll] = useState(false);
       </p>
 
       <p className="text-gray-300">
-        <strong>Phone:</strong> +447774559680
+        <strong>Phone:</strong> +44 7551 024386
       </p>
 
       <p className="text-gray-300">
@@ -627,6 +606,28 @@ const [showAll, setShowAll] = useState(false);
 
   </div>
 </section>
+
+ {/* ================= FOOTER ================= */}
+      <footer className="bg-black text-gray-400 py-12 text-center space-y-4">
+
+        <p className="text-sm">
+          © 2026 Hosanna Global Enterprises Limited
+        </p>
+
+       <p className="text-sm">
+        41 Edward Street, North Ormesby, Middlesbrough,
+        North Yorkshire, United Kingdom, TS3 6JJ
+       </p>
+
+        <div className="flex justify-center gap-8 text-sm">
+
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/services">Services</Link>
+          <Link href="https://wa.me/447551024386">Contact</Link>
+
+        </div>
+
+      </footer>
 
     </main>
   );
