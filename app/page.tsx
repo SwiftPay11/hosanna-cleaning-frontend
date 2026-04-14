@@ -239,7 +239,7 @@ const [showAll, setShowAll] = useState(false);
     </h2>
 
     <p className="text-gray-400 text-lg mt-4">
-      Prices Start from £15.95 Per Hour
+      Prices Start from £13.40 Per Hour
     </p>
   </div>
 
