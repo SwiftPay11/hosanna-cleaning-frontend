@@ -218,34 +218,41 @@ const [showAll, setShowAll] = useState(false);
 
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10" onClick={() => router.push("/login")}>
+       <div
+  className="max-w-7xl mx-auto px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
+  onClick={() => router.push("/login")}
+>
+  {[
+    { image: "/services/residential.jpg", title: "Residential Cleaning" },
+    { image: "/services/office.jpg", title: "Office Cleaning" },
+    { image: "/services/airbnb.jpg", title: "Airbnb Cleaning" },
+    { image: "/services/move.jpg", title: "Move-In / Move-Out Cleaning" },
+    { image: "/services/tenancy.jpg", title: "End of Tenancy Cleaning" },
+    { image: "/services/outdoor.jpg", title: "Outdoor / Street Cleaning" },
+  ].map((service, i) => (
+    <div
+      key={i}
+      className="bg-[#2b1d16] p-6 rounded-2xl border border-[#3a2a21] hover:border-[#6b3e26] hover:-translate-y-2 transition space-y-4 cursor-pointer"
+    >
+      
+      {/* Image */}
+      <div className="w-full h-40 overflow-hidden rounded-xl">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-          {[
-            { icon: <Home />, title: "Residential Cleaning" },
-            { icon: <Building2 />, title: "Office Cleaning" },
-            { icon: <Sparkles />, title: "Airbnb Cleaning" },
-            { icon: <Truck />, title: "Move-In / Move-Out Cleaning" },
-            { icon: <ShieldCheck />, title: "End of Tenancy Cleaning" },
-            { icon: <Clock />, title: "Outdoor / Street Cleaning" },
-          ].map((service, i) => (
+      {/* Title */}
+      <h3 className="text-white font-semibold text-lg">
+        {service.title}
+      </h3>
 
-            <div
-              key={i}
-              className="bg-[#2b1d16] p-8 rounded-2xl border border-[#3a2a21] hover:border-[#6b3e26] hover:-translate-y-2 transition space-y-4"
-            >
+    </div>
+  ))}
+</div>
 
-              <div className="w-14 h-14 bg-[#6b3e26] rounded-full flex items-center justify-center text-white">
-                {service.icon}
-              </div>
-
-              <h3 className="text-xl font-semibold text-white">
-                {service.title}
-              </h3>
-
-            </div>
-
-          ))}
-        </div>
       </section>
 
       {/* ================= HOW IT WORKS ================= */}
