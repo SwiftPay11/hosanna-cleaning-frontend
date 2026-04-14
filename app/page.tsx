@@ -319,39 +319,66 @@ const [showAll, setShowAll] = useState(false);
 </section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <section id="how" className="py-24">
-        <div className="text-center mb-16">
+     <section id="how" className="py-28 bg-black">
+  <div className="text-center mb-20">
 
-          <h2 className="text-4xl font-bold text-white">
-            How It Works
-          </h2>
+    <h2 className="text-4xl md:text-5xl font-bold text-white">
+      How It Works
+    </h2>
 
-          <p className="text-gray-400 mt-3">
-            Simple booking process
-          </p>
+    <p className="text-gray-400 mt-4 text-lg">
+      A seamless and professional cleaning experience from start to finish
+    </p>
 
+  </div>
+<div className="hidden md:block absolute top-8 left-0 right-0 h-[2px] bg-[#6b3e26]/30 z-0" />
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-4 gap-12 text-center relative">
+
+    {[
+      {
+        title: "Book Your Service",
+        desc: "Schedule your cleaning in minutes using our simple and secure booking system.",
+      },
+      {
+        title: "Team Arrival",
+        desc: "Our trained professionals arrive on time, fully equipped and ready.",
+      },
+      {
+        title: "Expert Cleaning",
+        desc: "We carry out a detailed and high-standard cleaning tailored to your needs.",
+      },
+      {
+        title: "Enjoy Your Space",
+        desc: "Relax and enjoy a spotless, refreshed environment with zero stress.",
+      },
+    ].map((step, i) => (
+
+      <div
+        key={i}
+        className="space-y-5 group transition"
+      >
+
+        {/* NUMBER CIRCLE */}
+        <div className="w-16 h-16 bg-[#6b3e26] group-hover:bg-[#8B5E3C] text-white rounded-full flex items-center justify-center mx-auto text-lg font-semibold shadow-lg transition">
+          {i + 1}
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-4 gap-12 text-center">
+        {/* TITLE */}
+        <h4 className="font-semibold text-lg text-white">
+          {step.title}
+        </h4>
 
-          {["Book Service", "Cleaning Team Arrives", "Professional Cleaning", "Enjoy Clean Space"].map((step, i) => (
+        {/* DESCRIPTION */}
+        <p className="text-gray-400 text-sm leading-relaxed px-4">
+          {step.desc}
+        </p>
 
-            <div key={i} className="space-y-4">
+      </div>
 
-              <div className="w-16 h-16 bg-[#6b3e26] text-white rounded-full flex items-center justify-center mx-auto text-lg font-semibold">
-                {i + 1}
-              </div>
+    ))}
 
-              <h4 className="font-semibold text-lg text-white">
-                {step}
-              </h4>
-
-            </div>
-
-          ))}
-
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* ================= TESTIMONIALS ================= */}
    
@@ -523,6 +550,83 @@ const [showAll, setShowAll] = useState(false);
         </div>
 
       </footer>
+
+      <section className="bg-[#0f0a07] text-white py-20 mt-20 border-t border-[#6b3e26]/30">
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
+
+    {/* LEFT - CONTACT */}
+    <div className="space-y-4">
+      <h3 className="text-2xl font-bold text-[#8B5E3C]">
+        Get In Touch
+      </h3>
+
+      <p className="text-gray-300">
+        <strong>Email:</strong> info@hosannaglobal.co.uk
+      </p>
+
+      <p className="text-gray-300">
+        <strong>Phone:</strong> +447774559680
+      </p>
+
+      <p className="text-gray-300">
+        <strong>Address:</strong> 41 Edward Street, Middlesbrough
+      </p>
+
+      <p className="text-gray-300">
+        <strong>Hours:</strong> Mon – Sat: 9:00am – 8:00pm <br />
+        Sunday – CLOSED
+      </p>
+    </div>
+
+    {/* RIGHT - MAP */}
+    <div className="w-full h-[300px] rounded-xl overflow-hidden border border-[#6b3e26]/40">
+      <iframe
+        src="https://maps.google.com/maps?q=Middlesbrough&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        className="w-full h-full border-0"
+        loading="lazy"
+      />
+    </div>
+
+  </div>
+
+  {/* AREAS */}
+  <div className="text-center mt-10">
+    <p className="text-gray-400">
+      Areas Covered:
+      <span className="text-[#8B5E3C] font-semibold"> Middlesbrough & Surroundings</span>
+    </p>
+  </div>
+
+  {/* FOOTER BOTTOM */}
+  <div className="mt-16 border-t border-[#6b3e26]/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+
+    {/* LOGO */}
+    <div className="text-[#8B5E3C] font-bold text-lg">
+      HOSANNA GLOBAL ENTERPRISES LIMITED
+      <Image src="/logo.jpeg" alt="logo" width={120} height={40} />
+    </div>
+
+    {/* SOCIALS */}
+    <div className="flex gap-4">
+      {[
+        { name: "Facebook", link: "#" },
+        { name: "X", link: "#" },
+        { name: "LinkedIn", link: "#" },
+        { name: "Email", link: "mailto:info@hosannaglobal.co.uk" },
+        { name: "WhatsApp", link: "#" },
+      ].map((item, i) => (
+        <a
+          key={i}
+          href={item.link}
+          className="px-4 py-2 border border-[#6b3e26] rounded hover:bg-[#6b3e26] transition text-sm"
+        >
+          {item.name}
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
 
     </main>
   );
