@@ -104,9 +104,9 @@ const [showAll, setShowAll] = useState(false);
 
             <Link
               href="/login"
-              className="bg-[#6b3e26] text-white px-5 py-2.5 rounded-md hover:bg-[#8a5234] transition"
+              className="bg-[#6b3e26] text-white px-6 py-3 rounded-md hover:bg-[#8a5234] transition animate-shake"
             >
-              Book Now
+              GET A QUOTE NOW
             </Link>
 
           </div>
@@ -197,9 +197,9 @@ const [showAll, setShowAll] = useState(false);
 
               <Link
                 href="/register"
-                className="bg-[#6b3e26] text-white px-6 py-3 rounded-md hover:bg-[#8a5234] transition"
+                className="bg-[#6b3e26] text-white px-8 py-3 rounded-md hover:bg-[#8a5234] transition animate-[wiggle_1s_ease-in-out_infinite]"
               >
-                Book Cleaning
+                GET A QUOTE NOW
               </Link>
 
               <Link
@@ -305,7 +305,7 @@ const [showAll, setShowAll] = useState(false);
             {service.text}
           </p>
 
-          <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-8 py-3 rounded font-semibold animate-shake">
+          <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-8 py-3 rounded font-semibold  animate-[wiggle_1s_ease-in-out_infinite]" onClick={() => router.push("/login")}>
             Get A Quote
           </button>
 
