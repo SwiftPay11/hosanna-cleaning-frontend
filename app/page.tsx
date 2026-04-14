@@ -205,55 +205,54 @@ const [showAll, setShowAll] = useState(false);
       </section>
 
       {/* ================= SERVICES ================= */}
-      <section className="py-24 bg-[#1a120d]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16">
+     <section className="bg-black py-24 px-6">
+  
+  {/* TOP TEXT */}
+  <div className="text-center mb-14">
+    <p className="text-[#8B5E3C] uppercase tracking-[3px] text-sm">
+      WHAT WE OFFER
+    </p>
 
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Our Cleaning Services
-          </h2>
+    <h2 className="text-5xl font-bold text-white mt-3">
+      Explore all of our Services
+    </h2>
 
-          <p className="text-gray-400 text-lg">
-            Professional cleaning solutions for homes and businesses
-          </p>
+    <p className="text-gray-400 text-lg mt-4">
+      Prices Start from £15.95 Per Hour
+    </p>
+  </div>
 
-        </div>
+  {/* CARD */}
+  <div className="max-w-6xl mx-auto bg-[#2b1d16] border border-[#3a2a21] rounded-lg shadow-xl p-8 flex flex-col lg:flex-row items-center gap-10">
 
-       <div
-  className="max-w-7xl mx-auto px-6 lg:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
-  onClick={() => router.push("/login")}
->
-  {[
-    { image: "/services/residential.jpg", title: "Residential Cleaning" },
-    { image: "/services/office.jpg", title: "Office Cleaning" },
-    { image: "/services/airbnb.jpg", title: "Airbnb Cleaning" },
-    { image: "/services/move.jpg", title: "Move-In / Move-Out Cleaning" },
-    { image: "/services/tenancy.jpg", title: "End of Tenancy Cleaning" },
-    { image: "/services/outdoor.jpg", title: "Outdoor / Street Cleaning" },
-  ].map((service, i) => (
-    <div
-      key={i}
-      className="bg-[#2b1d16] p-6 rounded-2xl border border-[#3a2a21] hover:border-[#6b3e26] hover:-translate-y-2 transition space-y-4 cursor-pointer"
-    >
-      
-      {/* Image */}
-      <div className="w-full h-40 overflow-hidden rounded-xl">
-        <img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    {/* IMAGE */}
+    <div className="w-full lg:w-1/2">
+      <img
+        src="/services/residential.jpg"
+        alt="Standard Clean"
+        className="w-full h-[280px] object-cover rounded-md"
+      />
+    </div>
 
-      {/* Title */}
-      <h3 className="text-white font-semibold text-lg">
-        {service.title}
+    {/* TEXT SIDE */}
+    <div className="w-full lg:w-1/2 text-center lg:text-left">
+
+      <h3 className="text-2xl font-bold text-white mb-4">
+        Standard Clean
       </h3>
 
-    </div>
-  ))}
-</div>
+      <p className="text-gray-300 leading-8 text-[16px] mb-6">
+        A standard clean is something that a homeowner would do regularly to upkeep the cleanliness of their homes. Regular chores, such as vacuuming and mopping the floors, general bathroom cleaning, kitchen cleaning, and dusting.
+      </p>
 
-      </section>
+      <button className="bg-[#6b3e26] hover:bg-[#8B5E3C] text-white px-8 py-3 rounded font-semibold animate-shake">
+        Get A Quote
+      </button>
+
+    </div>
+  </div>
+
+</section>
 
       {/* ================= HOW IT WORKS ================= */}
       <section id="how" className="py-24">
