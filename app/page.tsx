@@ -179,9 +179,7 @@ const [showAll, setShowAll] = useState(false);
 
           <div className="space-y-6">
 
-            <span className="bg-[#6b3e26]/40 px-4 py-2 rounded-full text-sm">
-              Professional Cleaning Services
-            </span>
+          
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight text-white">
               Professional Cleaning For Homes, Offices & Businesses
@@ -215,7 +213,7 @@ const [showAll, setShowAll] = useState(false);
 
           <div className="relative h-96 w-full rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="/cleaning.jpg"
+              src="/process/cleaning.jpg"
               alt="Professional cleaning service"
               fill
               className="object-cover"
@@ -321,6 +319,8 @@ const [showAll, setShowAll] = useState(false);
 
       {/* ================= HOW IT WORKS ================= */}
      <section id="how" className="py-28 bg-black">
+
+  {/* HEADER */}
   <div className="text-center mb-20">
 
     <h2 className="text-4xl md:text-5xl font-bold text-white">
@@ -332,53 +332,73 @@ const [showAll, setShowAll] = useState(false);
     </p>
 
   </div>
-<div className="hidden md:block absolute top-8 left-0 right-0 h-[2px] bg-[#6b3e26]/30 z-0" />
-  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-4 gap-12 text-center relative">
+
+  {/* PROCESS CARDS */}
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
 
     {[
       {
+        image: "/process/book.jpg",
         title: "Book Your Service",
-        desc: "Schedule your cleaning in minutes using our simple and secure booking system.",
+        desc: "Schedule your cleaning in minutes using our secure and simple booking process.",
       },
+
       {
+        image: "/process/team.jpg",
         title: "Team Arrival",
-        desc: "Our trained professionals arrive on time, fully equipped and ready.",
+        desc: "Our professional cleaners arrive fully equipped and ready to deliver excellence.",
       },
+
       {
+        image: "/process/clean.jpg",
         title: "Expert Cleaning",
-        desc: "We carry out a detailed and high-standard cleaning tailored to your needs.",
+        desc: "We carry out a detailed, high-standard cleaning tailored to your space and needs.",
       },
+
       {
+        image: "/process/enjoy.jpg",
         title: "Enjoy Your Space",
         desc: "Relax and enjoy a spotless, refreshed environment with zero stress.",
       },
+
     ].map((step, i) => (
 
       <div
         key={i}
-        className="space-y-5 group transition"
+        className="bg-[#1a120d] border border-[#3a2a21] rounded-2xl overflow-hidden hover:-translate-y-2 hover:border-[#8B5E3C] transition duration-300 shadow-xl"
       >
 
-        {/* NUMBER CIRCLE */}
-        <div className="w-16 h-16 bg-[#6b3e26] group-hover:bg-[#8B5E3C] text-white rounded-full flex items-center justify-center mx-auto text-lg font-semibold shadow-lg transition">
-          {i + 1}
+        {/* IMAGE */}
+        <div className="relative w-full h-52 overflow-hidden">
+
+          <img
+            src={step.image}
+            alt={step.title}
+            className="w-full h-full object-cover hover:scale-110 transition duration-500"
+          />
+
+
         </div>
 
-        {/* TITLE */}
-        <h4 className="font-semibold text-lg text-white">
-          {step.title}
-        </h4>
+        {/* CONTENT */}
+        <div className="p-6 text-center">
 
-        {/* DESCRIPTION */}
-        <p className="text-gray-400 text-sm leading-relaxed px-4">
-          {step.desc}
-        </p>
+          <h4 className="text-xl font-semibold text-white mb-3">
+            {step.title}
+          </h4>
+
+          <p className="text-gray-400 text-sm leading-7">
+            {step.desc}
+          </p>
+
+        </div>
 
       </div>
 
     ))}
 
   </div>
+
 </section>
 
       {/* ================= TESTIMONIALS ================= */}
