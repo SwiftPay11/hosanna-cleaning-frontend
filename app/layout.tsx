@@ -4,7 +4,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 
 export const metadata = {
   title: "HOSANNA GLOBAL ENTERPRISE LIMITED",
-  description: "Premium garment care services",
+  description: "Professional cleaning service",
 };
 
 export default function RootLayout({
