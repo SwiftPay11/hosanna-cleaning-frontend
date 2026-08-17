@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import Link from "next/link";
-import { Sparkles, Loader2 } from "lucide-react";
 import Image from "next/image";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Loader2,
+  LockKeyhole,
+  Mail,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+import styles from "./page.module.css";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,8 +24,8 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e:any) => {
-    e.preventDefault();
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
 
     try {
@@ -29,9 +38,7 @@ export default function LoginPage() {
       });
 
       localStorage.setItem("token", data.access_token);
-
       router.push("/dashboard");
-
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message || "Server error");
@@ -44,129 +51,175 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black relative px-6">
+    <main className={styles.page}>
+      <section className={styles.visualPanel} aria-label="Hosanna Global cleaning services">
+        <Image
+          src="/process/cleaning.jpg"
+          alt="Hosanna professional cleaning team"
+          fill
+          priority
+          sizes="(max-width: 900px) 100vw, 56vw"
+          className={styles.backgroundImage}
+        />
+        <div className={styles.visualOverlay} />
+        <div className={styles.visualGlow} />
 
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{
-          backgroundImage: "url('/cleaning-bg.jpg')",
-        }}
-      />
+        <div className={styles.visualContent}>
+          <div className={styles.brand}>
+            <span className={styles.logoWrap}>
+              <Image
+                src="/logo.jpeg"
+                alt="Hosanna Global logo"
+                width={50}
+                height={50}
+                className={styles.logo}
+              />
+            </span>
+            <span className={styles.brandText}>
+              <strong>Hosanna Global</strong>
+              <span>Enterprises Limited</span>
+            </span>
+          </div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-[#2b1d16]/90" />
+          <div className={styles.visualMessage}>
+            <span className={styles.eyebrow}>
+              <Sparkles size={15} aria-hidden="true" />
+              Welcome back
+            </span>
+            <h1>A cleaner space is only a few clicks away.</h1>
+            <p>
+              Sign in to manage your bookings and keep your home or business
+              looking its best.
+            </p>
 
-      <div className="relative w-full max-w-md">
+            <div className={styles.benefits}>
+              <span>
+                <CheckCircle2 size={18} aria-hidden="true" />
+                Manage your cleaning bookings
+              </span>
+              <span>
+                <CheckCircle2 size={18} aria-hidden="true" />
+                Review your service details
+              </span>
+              <span>
+                <CheckCircle2 size={18} aria-hidden="true" />
+                Access your account securely
+              </span>
+            </div>
+          </div>
 
-        {/* Company Branding */}
-        <div className="text-center mb-8">
-        
-        <div className="flex justify-center mb-4">
-  <div className="w-12 h-12 rounded-full overflow-hidden bg-white flex items-center justify-center">
-    <Image
-      src="/logo.jpeg"
-      alt="Hosanna Logo"
-      width={48}
-      height={48}
-      className="object-contain p-1"
-    />
-  </div>
-</div>
+          <div className={styles.visualFooter}>
+            <ShieldCheck size={20} aria-hidden="true" />
+            <span>
+              <strong>Professional care</strong>
+              For homes, offices, and businesses
+            </span>
+          </div>
+        </div>
+      </section>
 
-          <h1 className="text-2xl font-bold text-white">
-            HOSANNA GLOBAL ENTERPRISES LIMITED
-          </h1>
-
-          <p className="text-gray-400 text-sm mt-2">
-            Professional Cleaning Services
-          </p>
-
+      <section className={styles.formPanel}>
+        <div className={styles.mobileBrand}>
+          <span className={styles.logoWrap}>
+            <Image
+              src="/logo.jpeg"
+              alt="Hosanna Global logo"
+              width={46}
+              height={46}
+              className={styles.logo}
+            />
+          </span>
+          <span className={styles.brandText}>
+            <strong>Hosanna Global</strong>
+            <span>Enterprises Limited</span>
+          </span>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-[#1a120d] border border-[#3a2a21] p-10 rounded-2xl shadow-2xl backdrop-blur">
-
-          <h2 className="text-xl font-semibold text-white mb-6 text-center">
-            Login to Your Account
-          </h2>
+        <div className={styles.formWrap}>
+          <div className={styles.formHeading}>
+            <span>Client portal</span>
+            <h2>Login to your account</h2>
+            <p>Enter your details to access your cleaning services.</p>
+          </div>
 
           {error && (
-            <p className="bg-red-900/40 text-red-400 p-3 rounded mb-4 text-sm">
-              {error}
-            </p>
+            <div className={styles.errorMessage} role="alert">
+              <span>!</span>
+              <p>{error}</p>
+            </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-5">
-
-            {/* Email */}
-            <div>
-              <label className="text-sm text-gray-400">
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="w-full mt-2 bg-[#2b1d16] border border-[#3a2a21] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#6b3e26]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+          <form onSubmit={handleLogin} className={styles.form}>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="email">Email address</label>
+              <div className={styles.inputWrap}>
+                <Mail size={19} aria-hidden="true" />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  aria-invalid={Boolean(error)}
+                  required
+                />
+              </div>
             </div>
 
-            {/* Password */}
-            <div>
-              <label className="text-sm text-gray-400">
-                Password
-              </label>
-
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-full mt-2 bg-[#2b1d16] border border-[#3a2a21] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#6b3e26]"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+            <div className={styles.fieldGroup}>
+              <div className={styles.labelRow}>
+                <label htmlFor="password">Password</label>
+                <Link href="/forgot-password">Forgot password?</Link>
+              </div>
+              <div className={styles.inputWrap}>
+                <LockKeyhole size={19} aria-hidden="true" />
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  aria-invalid={Boolean(error)}
+                  required
+                />
+              </div>
             </div>
 
-            {/* Forgot Password */}
-            <div className="text-right text-sm">
-              <Link
-                href="/forgot-password"
-                className="text-[#caa27c] hover:underline"
-              >
-                Forgot password?
-              </Link>
-            </div>
-
-            {/* Login Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#6b3e26] text-white py-3 rounded-lg font-medium hover:bg-[#8a5234] transition flex items-center justify-center gap-2"
-            >
-              {loading && <Loader2 className="animate-spin" size={18} />}
-              {loading ? "Logging in..." : "Login"}
+            <button type="submit" disabled={loading} className={styles.loginButton}>
+              {loading ? (
+                <>
+                  <Loader2 className={styles.spinner} size={19} aria-hidden="true" />
+                  Logging in...
+                </>
+              ) : (
+                <>
+                  Login
+                  <ArrowRight size={19} aria-hidden="true" />
+                </>
+              )}
             </button>
-
           </form>
 
-          {/* Register Link */}
-          <p className="text-center text-sm text-gray-400 mt-6">
-            Don’t have an account?{" "}
-            <Link
-              href="/register"
-              className="text-[#caa27c] hover:underline"
-            >
-              Create account
-            </Link>
+          <div className={styles.divider}>
+            <span>New to Hosanna?</span>
+          </div>
+
+          <p className={styles.registerPrompt}>
+            Don&apos;t have an account? <Link href="/register">Create account</Link>
           </p>
 
+          <p className={styles.securityNote}>
+            <ShieldCheck size={15} aria-hidden="true" />
+            Your account details are handled securely.
+          </p>
         </div>
 
-      </div>
-    </div>
+        <p className={styles.copyright}>© 2026 Hosanna Global Enterprises Limited</p>
+      </section>
+    </main>
   );
 }

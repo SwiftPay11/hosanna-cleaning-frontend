@@ -1,0 +1,676 @@
+.page {
+  --navy-950: #071b2b;
+  --navy-900: #0b2942;
+  --navy-800: #113a5c;
+  --blue-600: #1f6fa8;
+  --blue-500: #2d82bc;
+  --blue-100: #dceef8;
+  --gold-500: #d2aa47;
+  --gold-400: #e0bc61;
+  --ink: #132637;
+  --muted: #667887;
+  --line: #dfe7ec;
+  --surface: #f4f8fa;
+  --white: #ffffff;
+  display: grid;
+  min-height: 100vh;
+  min-height: 100svh;
+  grid-template-columns: minmax(520px, 1.15fr) minmax(460px, 0.85fr);
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page button,
+.page input {
+  font: inherit;
+}
+
+.page a:focus-visible,
+.page button:focus-visible,
+.page input:focus-visible {
+  outline: 3px solid rgba(45, 130, 188, 0.32);
+  outline-offset: 3px;
+}
+
+.visualPanel {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--navy-950);
+}
+
+.backgroundImage,
+.visualOverlay,
+.visualGlow {
+  position: absolute;
+  inset: 0;
+}
+
+.backgroundImage {
+  z-index: -3;
+  object-fit: cover;
+  object-position: 55% center;
+  animation: imageReveal 1.2s ease both;
+}
+
+.visualOverlay {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(5, 22, 36, 0.92) 0%, rgba(7, 27, 43, 0.72) 52%, rgba(7, 27, 43, 0.38) 100%),
+    linear-gradient(0deg, rgba(7, 27, 43, 0.68) 0%, transparent 58%);
+}
+
+.visualGlow {
+  z-index: -1;
+  background: radial-gradient(circle at 15% 85%, rgba(45, 130, 188, 0.28), transparent 34%);
+}
+
+.visualContent {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(34px, 5vw, 66px) clamp(36px, 6vw, 82px);
+}
+
+.brand,
+.mobileBrand {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 13px;
+}
+
+.logoWrap {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 14px;
+  background: #f2faf7;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.13);
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brandText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brandText strong {
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.brandText span {
+  margin-top: 5px;
+  color: rgba(235, 244, 248, 0.68);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.visualMessage {
+  width: min(640px, 100%);
+  padding: 72px 0;
+  animation: contentReveal 700ms ease both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef8fc;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.eyebrow svg {
+  color: var(--gold-400);
+}
+
+.visualMessage h1 {
+  max-width: 620px;
+  margin: 0;
+  color: var(--white);
+  font-size: clamp(3.1rem, 5.7vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.visualMessage > p {
+  max-width: 540px;
+  margin: 26px 0 0;
+  color: rgba(230, 240, 245, 0.8);
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  line-height: 1.75;
+}
+
+.benefits {
+  display: grid;
+  margin-top: 34px;
+  gap: 13px;
+}
+
+.benefits span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(244, 249, 251, 0.9);
+  font-size: 0.87rem;
+  font-weight: 700;
+}
+
+.benefits svg {
+  flex: 0 0 auto;
+  color: var(--gold-400);
+}
+
+.visualFooter {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 22px;
+  color: var(--gold-400);
+}
+
+.visualFooter span {
+  display: flex;
+  flex-direction: column;
+  color: rgba(225, 237, 243, 0.65);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.visualFooter strong {
+  color: var(--white);
+  font-size: 0.84rem;
+}
+
+.formPanel {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 54px clamp(30px, 4vw, 66px) 32px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(220, 238, 248, 0.8), transparent 30%),
+    var(--surface);
+}
+
+.formPanel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(31, 111, 168, 0.08);
+  border-radius: 0 0 0 100%;
+  content: "";
+}
+
+.mobileBrand {
+  display: none;
+}
+
+.formWrap {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 100%);
+  border: 1px solid rgba(223, 231, 236, 0.92);
+  border-radius: 26px;
+  padding: clamp(34px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 26px 70px rgba(7, 27, 43, 0.1);
+  backdrop-filter: blur(14px);
+  animation: formReveal 650ms 80ms ease both;
+}
+
+.formHeading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue-600);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.formHeading > span::before {
+  width: 22px;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--gold-500);
+  content: "";
+}
+
+.formHeading h2 {
+  margin: 14px 0 0;
+  color: var(--navy-900);
+  font-size: clamp(2rem, 3.2vw, 2.65rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+.formHeading p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 24px;
+  border: 1px solid #f1c8c8;
+  border-radius: 11px;
+  padding: 12px 14px;
+  background: #fff4f4;
+  color: #a43e3e;
+}
+
+.errorMessage > span {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #b84747;
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.errorMessage p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.form {
+  display: grid;
+  margin-top: 30px;
+  gap: 22px;
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 9px;
+}
+
+.fieldGroup label,
+.labelRow label {
+  color: #31475a;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.labelRow a {
+  color: var(--blue-600);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.labelRow a:hover,
+.registerPrompt a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d7e1e7;
+  border-radius: 12px;
+  background: #fbfdfe;
+  color: #8b9aa5;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.inputWrap:focus-within {
+  border-color: var(--blue-500);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(45, 130, 188, 0.11);
+  color: var(--blue-600);
+}
+
+.inputWrap > svg {
+  position: absolute;
+  left: 15px;
+  pointer-events: none;
+}
+
+.inputWrap input {
+  width: 100%;
+  min-height: 53px;
+  border: 0;
+  outline: 0;
+  padding: 0 15px 0 46px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.inputWrap input::placeholder {
+  color: #9aa8b2;
+}
+
+.loginButton {
+  display: inline-flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--navy-900);
+  box-shadow: 0 14px 28px rgba(11, 41, 66, 0.17);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 800;
+  transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.loginButton:hover:not(:disabled) {
+  background: var(--blue-600);
+  box-shadow: 0 16px 32px rgba(31, 111, 168, 0.24);
+  transform: translateY(-2px);
+}
+
+.loginButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.spinner {
+  animation: spin 700ms linear infinite;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 28px 0 0;
+  color: #93a1ab;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+  content: "";
+}
+
+.registerPrompt {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.registerPrompt a {
+  color: var(--blue-600);
+  font-weight: 800;
+}
+
+.securityNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 25px 0 0;
+  color: #91a0aa;
+  font-size: 0.69rem;
+}
+
+.securityNote svg {
+  color: var(--blue-500);
+}
+
+.copyright {
+  margin: 30px 0 0;
+  color: #8c9ba6;
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes formReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1120px) {
+  .page {
+    grid-template-columns: minmax(460px, 1fr) minmax(440px, 0.95fr);
+  }
+
+  .visualContent {
+    padding-right: 46px;
+    padding-left: 46px;
+  }
+
+  .visualMessage h1 {
+    font-size: clamp(3rem, 5.2vw, 4.4rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .page {
+    display: block;
+    overflow: visible;
+  }
+
+  .visualPanel,
+  .visualContent {
+    min-height: 365px;
+  }
+
+  .visualContent {
+    justify-content: flex-end;
+    padding: 48px 32px;
+  }
+
+  .visualPanel .brand,
+  .benefits,
+  .visualFooter {
+    display: none;
+  }
+
+  .visualMessage {
+    width: min(660px, 100%);
+    padding: 0;
+  }
+
+  .visualMessage h1 {
+    max-width: 560px;
+    font-size: clamp(2.7rem, 8vw, 4rem);
+  }
+
+  .visualMessage > p {
+    max-width: 560px;
+  }
+
+  .formPanel {
+    min-height: auto;
+    padding: 48px 24px 30px;
+  }
+
+  .mobileBrand {
+    display: inline-flex;
+    width: min(480px, 100%);
+    margin-bottom: 24px;
+  }
+
+  .mobileBrand .brandText strong {
+    color: var(--navy-900);
+  }
+
+  .mobileBrand .brandText span {
+    color: var(--muted);
+  }
+
+  .mobileBrand .logoWrap {
+    width: 48px;
+    height: 48px;
+    border-color: var(--line);
+  }
+}
+
+@media (max-width: 560px) {
+  .visualPanel,
+  .visualContent {
+    min-height: 285px;
+  }
+
+  .visualContent {
+    padding: 38px 20px;
+  }
+
+  .visualMessage h1 {
+    font-size: clamp(2.2rem, 11vw, 3.1rem);
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+    font-size: 0.65rem;
+  }
+
+  .visualMessage > p {
+    display: none;
+  }
+
+  .formPanel {
+    align-items: stretch;
+    padding: 30px 16px 24px;
+  }
+
+  .mobileBrand {
+    width: 100%;
+    margin: 0 8px 20px;
+  }
+
+  .formWrap {
+    width: 100%;
+    border-radius: 20px;
+    padding: 30px 22px;
+  }
+
+  .formHeading h2 {
+    font-size: 2rem;
+  }
+
+  .form {
+    margin-top: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backgroundImage,
+  .visualMessage,
+  .formWrap,
+  .spinner {
+    animation: none;
+  }
+
+  .loginButton,
+  .inputWrap {
+    transition: none;
+  }
+}
